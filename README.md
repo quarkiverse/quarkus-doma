@@ -15,6 +15,8 @@ This extension provides the following features:
 - Multiple Datasources
 - Support for native images
 
+## Main Features
+
 ### Hot reloading
 
 In development mode, Doma extension reloads SQL and Script files when they are changed.
