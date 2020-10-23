@@ -1,29 +1,174 @@
-# Welcome to Quarkiverse!
+# Quarkus Doma Extension
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Congratulations and thank you for creating a new Quarkus extension project in Quarkiverse!
+[Doma](https://github.com/domaframework/doma) is a database access framework with support for type-safe Criteria API and SQL templates.
 
-Feel free to replace this content with the proper description of your new project and necessary instructions how to use and contribute to it.
+This extension provides the following features:
 
-You can find the basic info, Quarkiverse policies and conventions in [the Quarkiverse wiki](https://github.com/quarkiverse/quarkiverse/wiki).
+- Hot reloading
+- Automatic bean register
+- Automatic SQL execution on startup
+- Configuration
+- Multiple Datasources
+- Support for native images
 
-Need to quickly create a new Quarkus extension Maven project? Just execute the command below replacing the template values with your preferred ones:
+### Hot reloading
+
+In development mode, Doma extension reloads SQL and Script files when they are changed.
+
+### Automatic bean register
+
+Doma extension registers all DAO beans to the Quarkus CDI container.
+
+### Automatic SQL import on startup
+
+Doma extension executes ``import.sql`` when Quarkus starts.
+
+### Configuration
+
+You can write the following configurations in your application.properties file: 
+
 ```
-mvn io.quarkus:quarkus-maven-plugin:<QUARKUS_VERSION>:create-extension -N \
-    -DgroupId=io.quarkiverse.<REPO_NAME> \ 
-    -DartifactId=<EXTENSION_ARTIFACT_ID> \  
-    -Dversion=<INITIAL_VERSION> \ 
-    -Dquarkus.nameBase="<EXTENSION_SIMPLE_NAME>"
+quarkus.doma.sql-file-repository=greedy-cache
+quarkus.doma.naming=none
+quarkus.doma.exception-sql-log-type=none
+quarkus.doma.dialect=h2
+quarkus.doma.batch-size=10
+quarkus.doma.fetch-size=50
+quarkus.doma.max-rows=500
+quarkus.doma.query-timeout=5000
+quarkus.doma.sql-load-script=import.sql
 ```
-**IMPORTANT:** make sure your project uses [io.quarkiverse:quarkiverse-parent](https://github.com/quarkiverse/quarkiverse-parent) as the parent POM. It will make sure the release and artifact publishing plugins are properly configured for your project.
 
-In case you are creating a Quarkus extension project for the first time, please follow [Building My First Extension](https://quarkus.io/guides/building-my-first-extension) guide.
+The above properties are all optional.
 
-Other useful articles related to Quarkus extension development can be found under the [Writing Extensions](https://quarkus.io/guides/#writing-extensions) guide category on the [Quarkus.io](http://quarkus.io) website.
+### Multiple Datasources
 
-Thanks again, good luck and have fun!
+You can bind Doma's configurations to each datasource as follows:
+
+```
+# default datasource
+quarkus.datasource.db-kind=h2
+quarkus.datasource.username=username-default
+quarkus.datasource.jdbc.url=jdbc:h2:tcp://localhost/mem:default
+quarkus.datasource.jdbc.min-size=3
+quarkus.datasource.jdbc.max-size=13
+
+# inventory datasource
+quarkus.datasource.inventory.db-kind=h2
+quarkus.datasource.inventory.username=username2
+quarkus.datasource.inventory.jdbc.url=jdbc:h2:tcp://localhost/mem:inventory
+quarkus.datasource.inventory.jdbc.min-size=2
+quarkus.datasource.inventory.jdbc.max-size=12
+
+# Doma's configuration bound to the above default datasource
+quarkus.doma.dialect=h2
+quarkus.doma.batch-size=10
+quarkus.doma.fetch-size=50
+quarkus.doma.max-rows=500
+quarkus.doma.query-timeout=5000
+quarkus.doma.sql-load-script=import.sql
+
+# Doma's configuration bound to the above inventory datasource
+quarkus.doma.inventory.dialect=h2
+quarkus.doma.inventory.batch-size=10
+quarkus.doma.inventory.fetch-size=50
+quarkus.doma.inventory.max-rows=500
+quarkus.doma.inventory.query-timeout=5000
+quarkus.doma.inventory.sql-load-script=import.sql
+```
+
+You can inject the named Doma's resource 
+using the `io.quarkus.agroal.DataSource` qualifier as follows:
+
+```java
+@Inejct
+Config defaultConfig;
+
+@Inejct
+Entityql defaultEntityql;
+
+@Inejct
+NativeSql defaultNativeSql;
+
+@Inejct
+@DataSource("inventory")
+Config invetoryConfig;
+
+@Inejct
+@DataSource("inventory")
+Entityql inventoryEntityql;
+
+@Inejct
+@DataSource("inventory")
+NativeSql inventoryNativeSql;
+```
+
+### Support for native images
+
+Doma extension recognizes reflective classes and resources,
+and includes them into your native image without additional configurations.
+
+## Installing
+
+### Gradle
+
+```groovy
+dependencies {
+    annotationProcessor("org.seasar.doma:doma-processor:2.44.0")
+    implementation("org.seasar.doma:doma-core:2.44.0")
+    implementation("io.quarkiverse.doma:quarkus-doma-deployment:0.0.1-SNAPSHOT")
+}
+```
+
+### Maven
+
+```xml
+...
+<properties>
+    <doma.version>2.44.0</doma.version>
+    <quarkus-doma.version>0.0.1-SNAPSHOT</quarkus-doma.version>
+    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+</properties>
+...
+<dependencies>
+    <dependency>
+        <groupId>org.seasar.doma</groupId>
+        <artifactId>doma-core</artifactId>
+        <version>${doma.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>io.quarkiverse.doma</groupId>
+        <artifactId>quarkus-doma-deployment</artifactId>
+        <version>${quarkus-doma.version}</version>
+    </dependency>
+</dependencies>
+...
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${compiler-plugin.version}</version>
+            <configuration>
+                <source>11</source>
+                <target>11</target>
+                <!-- the parameters=true option is critical so that RESTEasy works fine -->
+                <parameters>true</parameters>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.seasar.doma</groupId>
+                        <artifactId>doma-processor</artifactId>
+                        <version>${doma.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
 
 ## Contributors ✨
 
