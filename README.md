@@ -1,4 +1,5 @@
 # Quarkus Doma Extension
+[![Build](https://github.com/quarkiverse/quarkiverse-doma/workflows/Build/badge.svg)](https://github.com/quarkiverse/quarkiverse-doma/actions?query=workflow%3ABuild)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
