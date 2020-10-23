@@ -1,0 +1,10 @@
+name: "Doma - Database access framework"
+metadata:
+  keywords:
+    - "doma"
+    - "orm"
+    - "sql"
+  guide: "https://quarkus.io/guides/doma"
+  categories:
+    - "data"
+  status: "preview"
