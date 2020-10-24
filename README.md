@@ -122,7 +122,7 @@ and includes them into your native image without additional configurations.
 dependencies {
     annotationProcessor("org.seasar.doma:doma-processor:2.44.0")
     implementation("org.seasar.doma:doma-core:2.44.0")
-    implementation("io.quarkiverse.doma:quarkus-doma-deployment:0.0.1")
+    implementation("io.quarkiverse.doma:quarkus-doma:0.0.1")
 }
 ```
 
@@ -144,7 +144,7 @@ dependencies {
     </dependency>
     <dependency>
         <groupId>io.quarkiverse.doma</groupId>
-        <artifactId>quarkus-doma-deployment</artifactId>
+        <artifactId>quarkus-doma</artifactId>
         <version>${quarkus-doma.version}</version>
     </dependency>
 </dependencies>
@@ -172,6 +172,10 @@ dependencies {
     </plugins>
 </build>
 ```
+
+## Sample project
+
+- [quarkus-sample](https://github.com/domaframework/quarkus-sample)
 
 ## Contributors ✨
 
