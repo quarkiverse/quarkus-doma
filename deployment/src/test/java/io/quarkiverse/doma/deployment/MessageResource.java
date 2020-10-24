@@ -26,7 +26,7 @@ public class MessageResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
         List<Message> messages = messageRepository.selectByLocale(new Locale("en", "US"));
-        return messages.stream().findFirst().map(m -> m.text.getValue()).orElseGet(() -> "empty");
+        return messages.stream().findFirst().map(m -> m.text.getValue()).orElse("empty");
     }
 
     @GET

@@ -19,6 +19,7 @@ import io.quarkus.test.QuarkusUnitTest;
 
 public class ScriptExecutorNoFileTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(

@@ -53,6 +53,7 @@ public class DomaBuildTimeConfig {
     @ConfigItem(defaultValue = "none")
     public SqlLogType exceptionSqlLogType;
 
+    @SuppressWarnings("CanBeFinal")
     @ConfigGroup
     public static class DataSourceBuildTimeConfig {
         /**
@@ -60,6 +61,7 @@ public class DomaBuildTimeConfig {
          *
          * @see Config#getDialect()
          */
+        @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
         @ConfigItem(defaultValueDocumentation = "depends on 'quarkus.datasource.db-kind'")
         public Optional<DomaSettings.DialectType> dialect = Optional.empty();
 
@@ -106,6 +108,7 @@ public class DomaBuildTimeConfig {
          * it defaults to `no-file`. It means Doma won't try to execute any SQL import file by default.
          * Pass an explicit value to force Doma to execute the SQL import file.
          */
+        @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
         @ConfigItem(defaultValueDocumentation = "import.sql in DEV, TEST ; no-file otherwise")
         public Optional<String> sqlLoadScript = Optional.empty();
 

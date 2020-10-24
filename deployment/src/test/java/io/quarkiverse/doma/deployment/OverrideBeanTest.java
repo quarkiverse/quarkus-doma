@@ -27,6 +27,7 @@ import io.quarkus.test.QuarkusUnitTest;
 
 public class OverrideBeanTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(

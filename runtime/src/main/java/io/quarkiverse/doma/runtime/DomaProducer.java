@@ -27,6 +27,7 @@ import org.seasar.doma.jdbc.tx.TransactionManager;
 import io.quarkus.arc.DefaultBean;
 import io.quarkus.arc.Unremovable;
 
+@SuppressWarnings({ "SameReturnValue", "unused" })
 @Singleton
 public class DomaProducer {
 

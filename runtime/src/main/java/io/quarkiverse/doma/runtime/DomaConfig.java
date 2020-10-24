@@ -22,6 +22,7 @@ import org.seasar.doma.jdbc.UnknownColumnHandler;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 
+@SuppressWarnings("unused")
 public class DomaConfig implements Config {
 
     private final Supplier<String> dataSourceNameSupplier;
@@ -204,10 +205,12 @@ public class DomaConfig implements Config {
         return queryTimeout;
     }
 
+    @SuppressWarnings("unused")
     public static Builder builder() {
         return new Builder();
     }
 
+    @SuppressWarnings("unused")
     public static Builder builder(DomaConfig config) {
         Objects.requireNonNull(config);
         Builder builder = new Builder();
@@ -359,6 +362,7 @@ public class DomaConfig implements Config {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static class Builder {
 
         private Supplier<String> dataSourceNameSupplier;
