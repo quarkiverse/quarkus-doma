@@ -1,10 +1,9 @@
 package io.quarkiverse.doma.deployment;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -46,12 +45,14 @@ public class OverrideBeanTest {
 
     static class MyProducer {
 
-        @ApplicationScoped
+        @SuppressWarnings("unused")
+        @Singleton
         SqlFileRepository sqlFileRepository() {
             return new NoCacheSqlFileRepository();
         }
 
-        @ApplicationScoped
+        @SuppressWarnings("unused")
+        @Singleton
         TransactionManager transactionManager(DataSource dataSource, JdbcLogger jdbcLogger) {
             LocalTransactionDataSource localTransactionDataSource = new LocalTransactionDataSource(dataSource);
             return new LocalTransactionManager(
@@ -59,9 +60,7 @@ public class OverrideBeanTest {
         }
     }
 
-    // @Inject MyCommenter c;
-
-    @ApplicationScoped
+    @Singleton
     @Unremovable
     static class MyCommenter implements Commenter {
         @Override
@@ -72,11 +71,8 @@ public class OverrideBeanTest {
 
     @Test
     void test() {
-        //
-        // CDI.current().getBeanManager().createInstance().select(Commenter.class).iterator().forEachRemaining(System.out::println);
-        // System.out.println(c2);
-        //    assertTrue(config.getSqlFileRepository().toString().contains("NoCacheSqlFileRepository"));
         assertTrue(config.getCommenter() instanceof MyCommenter);
-        assertNotNull(config.getTransactionManager());
+        assertTrue(config.getSqlFileRepository() instanceof NoCacheSqlFileRepository);
+        assertTrue(config.getTransactionManager() instanceof LocalTransactionManager);
     }
 }
