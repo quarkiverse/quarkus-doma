@@ -20,6 +20,7 @@ import io.quarkus.test.QuarkusUnitTest;
 
 public class ApplicationPropertiesTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(

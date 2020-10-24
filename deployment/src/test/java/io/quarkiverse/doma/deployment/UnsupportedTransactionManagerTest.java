@@ -16,6 +16,7 @@ import io.quarkus.test.QuarkusUnitTest;
 
 public class UnsupportedTransactionManagerTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(
@@ -35,10 +36,8 @@ public class UnsupportedTransactionManagerTest {
     void test() {
         UnsupportedOperationException ex = assertThrows(
                 UnsupportedOperationException.class,
-                () -> {
-                    tm.required(() -> {
-                    });
-                });
+                () -> tm.required(() -> {
+                }));
         assertTrue(ex.getMessage().startsWith("Use quarkus-narayana-jta"));
     }
 }

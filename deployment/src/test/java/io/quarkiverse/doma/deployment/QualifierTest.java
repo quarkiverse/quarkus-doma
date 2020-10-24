@@ -21,6 +21,7 @@ import io.quarkus.test.QuarkusUnitTest;
 
 public class QualifierTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(
@@ -66,19 +67,19 @@ public class QualifierTest {
     NativeSql inventoryNativeSql;
 
     @Test
-    void testDataSource() throws Exception {
+    void testDataSource() {
         assertEquals(dataSource, config.getDataSource());
         assertEquals(inventoryDataSource, inventoryConfig.getDataSource());
     }
 
     @Test
-    void testEntityql() throws Exception {
+    void testEntityql() {
         assertNotNull(entityql);
         assertNotNull(inventoryEntityql);
     }
 
     @Test
-    void testNativeSql() throws Exception {
+    void testNativeSql() {
         assertNotNull(nativeSql);
         assertNotNull(inventoryNativeSql);
     }

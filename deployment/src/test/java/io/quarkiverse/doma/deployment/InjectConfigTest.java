@@ -24,6 +24,7 @@ import io.quarkus.test.QuarkusUnitTest;
 
 public class InjectConfigTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(

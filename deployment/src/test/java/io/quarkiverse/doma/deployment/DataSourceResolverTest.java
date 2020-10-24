@@ -20,6 +20,7 @@ import io.vertx.ext.web.RoutingContext;
 
 public class DataSourceResolverTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(

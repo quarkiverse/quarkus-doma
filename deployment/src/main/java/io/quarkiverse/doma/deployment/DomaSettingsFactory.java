@@ -117,6 +117,7 @@ public class DomaSettingsFactory {
         }
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private String resolveSqlLoadScript(Optional<String> sqlLoadScript) {
         if (sqlLoadScript.isPresent()) {
             if (sqlLoadScript.get().equals(DomaBuildTimeConfig.SQL_LOAD_SCRIPT_NO_FILE)) {

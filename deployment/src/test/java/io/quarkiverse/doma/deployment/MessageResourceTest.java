@@ -23,6 +23,7 @@ import io.restassured.RestAssured;
 
 public class MessageResourceTest {
 
+    @SuppressWarnings("unused")
     @RegisterExtension
     static QuarkusUnitTest runner = new QuarkusUnitTest()
             .setArchiveProducer(
