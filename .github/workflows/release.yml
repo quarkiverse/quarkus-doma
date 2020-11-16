@@ -42,7 +42,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Configure Git author
-        uses: oleksiyrudenko/gha-git-credentials@v1
+        uses: oleksiyrudenko/gha-git-credentials@v2
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
 
