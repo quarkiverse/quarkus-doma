@@ -10,6 +10,7 @@
 
     <artifactId>quarkus-doma</artifactId>
     <name>Quarkus - Doma - Runtime</name>
+    <description>Simplify your database accesses with compile-time code generation</description>
 
     <dependencies>
         <dependency>
