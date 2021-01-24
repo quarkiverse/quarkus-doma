@@ -10,7 +10,7 @@
     
     <groupId>io.quarkiverse.doma</groupId>
     <artifactId>quarkus-doma-parent</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
     <name>Quarkus - Doma - Parent</name>
 
     <packaging>pom</packaging>
@@ -53,4 +53,8 @@
             </plugins>
         </pluginManagement>
     </build>
+
+  <scm>
+    <tag>0.0.4</tag>
+  </scm>
 </project>
