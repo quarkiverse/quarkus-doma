@@ -87,24 +87,24 @@ You can inject the named Doma's resource
 using the `io.quarkus.agroal.DataSource` qualifier as follows:
 
 ```java
-@Inejct
+@Inject
 Config defaultConfig;
 
-@Inejct
+@Inject
 Entityql defaultEntityql;
 
-@Inejct
+@Inject
 NativeSql defaultNativeSql;
 
-@Inejct
+@Inject
 @DataSource("inventory")
 Config invetoryConfig;
 
-@Inejct
+@Inject
 @DataSource("inventory")
 Entityql inventoryEntityql;
 
-@Inejct
+@Inject
 @DataSource("inventory")
 NativeSql inventoryNativeSql;
 ```
