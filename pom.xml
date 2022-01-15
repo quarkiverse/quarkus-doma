@@ -22,7 +22,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <quarkus.version>2.6.2.Final</quarkus.version>
-        <doma.version>2.49.0</doma.version>
+        <doma.version>2.51.0</doma.version>
         <compiler-plugin.version>3.9.0</compiler-plugin.version>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     </properties>
