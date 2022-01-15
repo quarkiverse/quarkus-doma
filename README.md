@@ -122,7 +122,7 @@ and includes them into your native image without additional configurations.
 dependencies {
     annotationProcessor("org.seasar.doma:doma-processor:2.51.0")
     implementation("org.seasar.doma:doma-core:2.51.0")
-    implementation("io.quarkiverse.doma:quarkus-doma:0.0.6")
+    implementation("io.quarkiverse.doma:quarkus-doma:0.0.7")
 }
 ```
 
@@ -132,7 +132,7 @@ dependencies {
 ...
 <properties>
     <doma.version>2.51.0</doma.version>
-    <quarkus-doma.version>0.0.6</quarkus-doma.version>
+    <quarkus-doma.version>0.0.7</quarkus-doma.version>
     <compiler-plugin.version>3.9.0</compiler-plugin.version>
 </properties>
 ...
