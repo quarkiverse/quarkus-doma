@@ -18,11 +18,11 @@ import org.seasar.doma.jdbc.Naming;
 import org.seasar.doma.jdbc.QueryImplementors;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.ScriptFileLoader;
-import org.seasar.doma.jdbc.Slf4jJdbcLogger;
 import org.seasar.doma.jdbc.SqlFileRepository;
 import org.seasar.doma.jdbc.SqlLogType;
 import org.seasar.doma.jdbc.UnknownColumnHandler;
 import org.seasar.doma.jdbc.tx.TransactionManager;
+import org.seasar.doma.slf4j.Slf4jJdbcLogger;
 
 import io.quarkus.arc.DefaultBean;
 import io.quarkus.arc.Unremovable;
