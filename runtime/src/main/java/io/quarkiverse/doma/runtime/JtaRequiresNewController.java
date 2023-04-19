@@ -1,7 +1,7 @@
 package io.quarkiverse.doma.runtime;
 
-import javax.inject.Singleton;
-import javax.transaction.Transactional;
+import jakarta.inject.Singleton;
+import jakarta.transaction.Transactional;
 
 import org.seasar.doma.jdbc.RequiresNewController;
 

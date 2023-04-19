@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import javax.enterprise.inject.Default;
+import jakarta.enterprise.inject.Default;
 
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.ConfigSupport;

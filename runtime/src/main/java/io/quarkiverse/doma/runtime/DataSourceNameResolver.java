@@ -2,7 +2,7 @@ package io.quarkiverse.doma.runtime;
 
 import java.util.Objects;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import io.quarkus.arc.DefaultBean;
 import io.quarkus.arc.Unremovable;

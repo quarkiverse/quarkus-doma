@@ -2,9 +2,10 @@ package io.quarkiverse.doma.runtime;
 
 import java.util.Objects;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.sql.DataSource;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import io.quarkus.agroal.runtime.DataSources;
 import io.quarkus.arc.DefaultBean;
