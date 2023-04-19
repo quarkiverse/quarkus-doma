@@ -24,7 +24,7 @@
         <quarkus.version>3.0.0.Final</quarkus.version>
         <doma.version>2.53.3</doma.version>
         <compiler-plugin.version>3.9.0</compiler-plugin.version>
-        <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+        <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
     </properties>
 
     <modules>
