@@ -3,7 +3,7 @@ package io.quarkiverse.doma.deployment.model;
 import java.util.List;
 import java.util.Objects;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.seasar.doma.jdbc.criteria.Entityql;
 

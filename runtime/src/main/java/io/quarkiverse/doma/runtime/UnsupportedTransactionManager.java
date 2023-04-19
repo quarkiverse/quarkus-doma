@@ -2,7 +2,7 @@ package io.quarkiverse.doma.runtime;
 
 import java.util.function.Supplier;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import org.seasar.doma.jdbc.tx.TransactionIsolationLevel;
 import org.seasar.doma.jdbc.tx.TransactionManager;

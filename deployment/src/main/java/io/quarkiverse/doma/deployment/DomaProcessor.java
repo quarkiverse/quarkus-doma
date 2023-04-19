@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.enterprise.inject.Default;
-import javax.inject.Singleton;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Singleton;
 
 import org.jboss.jandex.DotName;
 import org.jboss.jandex.IndexView;

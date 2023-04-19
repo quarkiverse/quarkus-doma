@@ -6,11 +6,12 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.sql.DataSource;
+
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
 import org.jboss.logging.Logger;
 import org.seasar.doma.internal.util.ResourceUtil;
