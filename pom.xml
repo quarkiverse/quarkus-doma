@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>io.quarkiverse</groupId>
-        <artifactId>quarkiverse-parent</artifactId>
-        <version>12</version>
-    </parent>
-    
-    <groupId>io.quarkiverse.doma</groupId>
-    <artifactId>quarkus-doma-parent</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
-    <name>Quarkus - Doma - Parent</name>
-
-    <packaging>pom</packaging>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <maven.compiler.parameters>true</maven.compiler.parameters>
-        <quarkus.version>3.0.0.Final</quarkus.version>
-        <doma.version>2.53.3</doma.version>
-        <compiler-plugin.version>3.9.0</compiler-plugin.version>
-        <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
-    </properties>
-
-    <modules>
-        <module>deployment</module>
-        <module>runtime</module>
-    </modules>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-bom</artifactId>
-                <version>${quarkus.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${compiler-plugin.version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.quarkiverse</groupId>
+    <artifactId>quarkiverse-parent</artifactId>
+    <version>12</version>
+  </parent>
+  <groupId>io.quarkiverse.doma</groupId>
+  <artifactId>quarkus-doma-parent</artifactId>
+  <version>0.0.8-SNAPSHOT</version>
+  <name>Quarkus - Doma - Parent</name>
+  <packaging>pom</packaging>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <quarkus.version>3.0.0.Final</quarkus.version>
+    <doma.version>2.53.3</doma.version>
+    <compiler-plugin.version>3.9.0</compiler-plugin.version>
+    <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+  </properties>
+  <scm>
+    <connection>:git:git@github.com:quarkiverse/quarkus-doma.git</connection>
+    <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-doma.git</developerConnection>
+    <url>https://github.com/quarkiverse/quarkus-doma</url>
+  </scm>
+  <modules>
+    <module>deployment</module>
+    <module>runtime</module>
+  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${quarkus.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compiler-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
