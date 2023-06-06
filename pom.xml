@@ -23,7 +23,7 @@
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
   </properties>
   <scm>
-    <connection>:git:git@github.com:quarkiverse/quarkus-doma.git</connection>
+    <connection>scm:git:git@github.com:quarkiverse/quarkus-doma.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-doma.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-doma</url>
   </scm>
