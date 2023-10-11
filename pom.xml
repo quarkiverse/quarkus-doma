@@ -19,7 +19,7 @@
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <quarkus.version>3.4.2</quarkus.version>
     <doma.version>2.54.1</doma.version>
-    <compiler-plugin.version>3.9.0</compiler-plugin.version>
+    <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
   </properties>
   <scm>
