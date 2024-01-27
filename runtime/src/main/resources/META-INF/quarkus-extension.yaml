@@ -4,7 +4,7 @@ metadata:
     - "doma"
     - "orm"
     - "sql"
-  guide: "https://github.com/quarkiverse/quarkus-doma"
+  guide: "https://docs.quarkiverse.io/quarkus-doma/dev/index.html"
   categories:
     - "data"
   status: "preview"

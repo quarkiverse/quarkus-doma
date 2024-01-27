@@ -6,7 +6,7 @@
 
 ## Documentation
 
-[docs/modules/ROOT/pages/index.adoc](docs/modules/ROOT/pages/index.adoc)
+https://docs.quarkiverse.io/quarkus-doma/dev/index.html
 
 ## Sample project
 
