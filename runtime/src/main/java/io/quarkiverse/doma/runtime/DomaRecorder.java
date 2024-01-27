@@ -34,7 +34,7 @@ public class DomaRecorder {
         Objects.requireNonNull(domaSettings);
         Objects.requireNonNull(launchMode);
         return beanContainer -> {
-            DomaProducer producer = beanContainer.instance(DomaProducer.class);
+            DomaProducer producer = beanContainer.beanInstance(DomaProducer.class);
 
             if (launchMode == LaunchMode.DEVELOPMENT) {
                 producer.setSqlFileRepository(
