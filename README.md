@@ -120,9 +120,9 @@ and includes them into your native image without additional configurations.
 
 ```groovy
 dependencies {
-    annotationProcessor("org.seasar.doma:doma-processor:2.51.0")
-    implementation("org.seasar.doma:doma-core:2.51.0")
-    implementation("io.quarkiverse.doma:quarkus-doma:0.0.7")
+    annotationProcessor("org.seasar.doma:doma-processor:2.55.1")
+    implementation("org.seasar.doma:doma-core:2.55.1")
+    implementation("io.quarkiverse.doma:quarkus-doma:0.0.8")
 }
 ```
 
