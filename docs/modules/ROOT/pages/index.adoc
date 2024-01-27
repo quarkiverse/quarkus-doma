@@ -1,3 +1,4 @@
+include::./includes/attributes.adoc[]
 = Quarkus - Doma
 :extension-status: preview
 
@@ -32,7 +33,7 @@ Doma extension executes ``import.sql`` when Quarkus starts.
 
 You can write the following configurations in your application.properties file:
 
-```
+----
 quarkus.doma.sql-file-repository=greedy-cache
 quarkus.doma.naming=none
 quarkus.doma.exception-sql-log-type=none
@@ -42,7 +43,7 @@ quarkus.doma.fetch-size=50
 quarkus.doma.max-rows=500
 quarkus.doma.query-timeout=5000
 quarkus.doma.sql-load-script=import.sql
-```
+----
 
 The above properties are all optional.
 
@@ -50,7 +51,7 @@ The above properties are all optional.
 
 You can bind Doma's configurations to each datasource as follows:
 
-```
+----
 # default datasource
 quarkus.datasource.db-kind=h2
 quarkus.datasource.username=username-default
@@ -80,12 +81,13 @@ quarkus.doma.inventory.fetch-size=50
 quarkus.doma.inventory.max-rows=500
 quarkus.doma.inventory.query-timeout=5000
 quarkus.doma.inventory.sql-load-script=import.sql
-```
+----
 
 You can inject the named Doma's resource
 using the `io.quarkus.agroal.DataSource` qualifier as follows:
 
-```java
+[source, java]
+----
 @Inject
 Config defaultConfig;
 
@@ -106,7 +108,7 @@ Entityql inventoryEntityql;
 @Inject
 @DataSource("inventory")
 NativeSql inventoryNativeSql;
-```
+----
 
 === Support for native images
 
@@ -117,17 +119,19 @@ and includes them into your native image without additional configurations.
 
 === Gradle
 
-```groovy
+[source, kotlin, subs=attributes+]
+----
 dependencies {
     annotationProcessor("org.seasar.doma:doma-processor:{doma-version}")
     implementation("org.seasar.doma:doma-core:{doma-version}")
     implementation("io.quarkiverse.doma:quarkus-doma:{quarkus-doma-version}")
 }
-```
+----
 
 === Maven
 
-```xml
+[source, xml, subs=attributes+]
+----
 ...
 <properties>
     <doma.version>{doma-version}</doma.version>
@@ -170,7 +174,7 @@ dependencies {
         </plugin>
     </plugins>
 </build>
-```
+----
 
 == Configuration References
 include::includes/quarkus-doma.adoc[opts=optional, leveloffset=+1]
