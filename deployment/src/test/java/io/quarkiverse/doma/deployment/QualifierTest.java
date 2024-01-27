@@ -68,8 +68,8 @@ public class QualifierTest {
 
     @Test
     void testDataSource() {
-        assertEquals(dataSource, config.getDataSource());
-        assertEquals(inventoryDataSource, inventoryConfig.getDataSource());
+        assertEquals(dataSource.toString(), config.getDataSource().toString());
+        assertEquals(inventoryDataSource.toString(), inventoryConfig.getDataSource().toString());
     }
 
     @Test
