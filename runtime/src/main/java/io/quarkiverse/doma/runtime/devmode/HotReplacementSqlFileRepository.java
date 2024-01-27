@@ -13,8 +13,6 @@ import org.seasar.doma.jdbc.AbstractSqlFileRepository;
 import org.seasar.doma.jdbc.SqlFile;
 import org.seasar.doma.jdbc.dialect.Dialect;
 
-import io.quarkiverse.doma.runtime.FileUtil;
-
 public class HotReplacementSqlFileRepository extends AbstractSqlFileRepository {
 
     private final List<Path> resourcesDirs;
@@ -35,7 +33,7 @@ public class HotReplacementSqlFileRepository extends AbstractSqlFileRepository {
             Path file = dir.resolve(path);
             if (Files.exists(file)) {
                 try {
-                    return FileUtil.readString(file);
+                    return Files.readString(file);
                 } catch (IOException e) {
                     throw new UncheckedIOException(e);
                 }

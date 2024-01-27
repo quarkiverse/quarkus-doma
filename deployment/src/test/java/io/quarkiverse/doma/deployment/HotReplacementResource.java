@@ -2,6 +2,7 @@ package io.quarkiverse.doma.deployment;
 
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import jakarta.inject.Inject;
@@ -12,8 +13,6 @@ import jakarta.ws.rs.core.MediaType;
 
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.SqlFile;
-
-import io.quarkiverse.doma.runtime.FileUtil;
 
 @Path("/hot")
 public class HotReplacementResource {
@@ -39,6 +38,6 @@ public class HotReplacementResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String script() throws Exception {
         URL url = config.getScriptFileLoader().loadAsURL(SCRIPT_FILE);
-        return FileUtil.readString(Paths.get(url.toURI()));
+        return Files.readString(Paths.get(url.toURI()));
     }
 }
