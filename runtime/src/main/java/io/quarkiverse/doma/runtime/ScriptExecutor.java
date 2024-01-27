@@ -29,18 +29,21 @@ public class ScriptExecutor {
 
     private final Map<String, String> namedSqlLoadScripts;
 
+    private final DataSources dataSources;
+
     @Inject
     public ScriptExecutor(
-            @Named("doma.namedSqlLoadScripts") Map<String, String> namedSqlLoadScripts) {
+            @Named("doma.namedSqlLoadScripts") Map<String, String> namedSqlLoadScripts, DataSources dataSources) {
         Objects.requireNonNull(namedSqlLoadScripts);
         this.namedSqlLoadScripts = Collections.unmodifiableMap(namedSqlLoadScripts);
+        this.dataSources = dataSources;
     }
 
     void onStartup(@Observes StartupEvent event) throws Exception {
         for (Map.Entry<String, String> entry : namedSqlLoadScripts.entrySet()) {
             String name = entry.getKey();
             String path = entry.getValue();
-            AgroalDataSource dataSource = DataSources.fromName(name);
+            AgroalDataSource dataSource = dataSources.getDataSource(name);
             if (dataSource == null) {
                 throw new IllegalStateException(String.format("The datasource '%s' is not found.", name));
             }

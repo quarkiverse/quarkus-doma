@@ -111,7 +111,7 @@ class DomaProcessor {
         DomaClassScanner scanner = new DomaClassScanner(indexView);
         List<String> scannedClasses = scanner.scan();
         classes.addAll(scannedClasses);
-        return new ReflectiveClassBuildItem(true, true, classes.toArray(new String[0]));
+        return ReflectiveClassBuildItem.builder(classes.toArray(new String[0])).methods(true).fields(true).build();
     }
 
     @BuildStep
