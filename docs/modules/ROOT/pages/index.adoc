@@ -172,6 +172,5 @@ dependencies {
 </build>
 ```
 
-== Sample project
-
-https://github.com/domaframework/quarkus-sample[quarkus-sample]
+== Configuration References
+include::includes/quarkus-doma.adoc[opts=optional, leveloffset=+1]
