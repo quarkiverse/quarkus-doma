@@ -1,0 +1,3 @@
+:quarkus-version: 3.7.0
+:quarkus-doma-version: 0.0.8
+:doma-version: 2.55.1
