@@ -1,12 +1,12 @@
 include::./includes/attributes.adoc[]
-= Quarkus - Doma
+= Quarkus Doma
 :extension-status: preview
 
 == Introduction
 
 https://github.com/domaframework/doma[Doma] is a database access framework with support for type-safe Criteria API and SQL templates.
 
-This extension provides the following features:
+https://github.com/quarkiverse/quarkus-doma[Quarkus Doma] provides the following features for Doma:
 
 - Hot reloading
 - Automatic bean register
@@ -14,6 +14,12 @@ This extension provides the following features:
 - Configuration
 - Multiple Datasources
 - Support for native images
+
+== Supported Version
+
+Quarkus Doma supports Quarkus v{quarkus-version} and later.
+
+See also https://quarkus.io/extensions/io.quarkiverse.doma/quarkus-doma/
 
 == Main Features
 
@@ -175,6 +181,10 @@ dependencies {
     </plugins>
 </build>
 ----
+
+== Sample Project
+
+https://github.com/domaframework/quarkus-sample[domaframework/quarkus-sample]
 
 == Configuration References
 include::includes/quarkus-doma.adoc[opts=optional, leveloffset=+1]
