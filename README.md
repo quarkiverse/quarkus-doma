@@ -6,7 +6,7 @@
 
 ## Documentation
 
-https://docs.quarkiverse.io/quarkus-doma/dev/index.html
+https://doma.readthedocs.io/en/latest/quarkus-support/
 
 ## Sample project
 
