@@ -9,93 +9,93 @@ import org.seasar.doma.jdbc.SqlLogType;
 import io.quarkiverse.doma.runtime.DomaSettings;
 import io.quarkus.runtime.annotations.ConfigDocMapKey;
 import io.quarkus.runtime.annotations.ConfigDocSection;
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
+import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithParentName;
 
-@ConfigRoot
-public class DomaBuildTimeConfig {
+@ConfigMapping(prefix = "quarkus.doma")
+@ConfigRoot(phase = ConfigPhase.BUILD_TIME)
+public interface DomaBuildTimeConfig {
 
-    public static final String SQL_LOAD_SCRIPT_DEFAULT = "import.sql";
-    public static final String SQL_LOAD_SCRIPT_NO_FILE = "no-file";
+    String SQL_LOAD_SCRIPT_DEFAULT = "import.sql";
+    String SQL_LOAD_SCRIPT_NO_FILE = "no-file";
 
     /** The default datasource. */
-    @ConfigItem(name = ConfigItem.PARENT)
-    public DataSourceBuildTimeConfig defaultDataSource;
+    @WithParentName
+    DataSourceBuildTimeConfig defaultDataSource();
 
     /** Additional named datasources. */
     @ConfigDocSection
     @ConfigDocMapKey("datasource-name")
-    @ConfigItem(name = ConfigItem.PARENT)
-    public Map<String, DataSourceBuildTimeConfig> namedDataSources;
+    @WithParentName
+    Map<String, DataSourceBuildTimeConfig> namedDataSources();
 
     /**
      * The SQL file repository.
      *
      * @see Config#getSqlFileRepository()
      */
-    @ConfigItem(defaultValue = "greedy-cache")
-    public DomaSettings.SqlFileRepositoryType sqlFileRepository;
+    @WithDefault("greedy-cache")
+    DomaSettings.SqlFileRepositoryType sqlFileRepository();
 
     /**
      * The naming convention controller.
      *
      * @see Config#getNaming()
      */
-    @ConfigItem(defaultValue = "none")
-    public DomaSettings.NamingType naming;
+    @WithDefault("none")
+    DomaSettings.NamingType naming();
 
     /**
      * The SQL log type that determines the SQL log format in exceptions.
      *
      * @see Config#getExceptionSqlLogType()
      */
-    @ConfigItem(defaultValue = "none")
-    public SqlLogType exceptionSqlLogType;
+    @WithDefault("none")
+    SqlLogType exceptionSqlLogType();
 
-    @SuppressWarnings("CanBeFinal")
-    @ConfigGroup
-    public static class DataSourceBuildTimeConfig {
+    interface DataSourceBuildTimeConfig {
         /**
          * The SQL dialect.
          *
          * @see Config#getDialect()
          */
         @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-        @ConfigItem(defaultValueDocumentation = "depends on 'quarkus.datasource.db-kind'")
-        public Optional<DomaSettings.DialectType> dialect = Optional.empty();
+        Optional<DomaSettings.DialectType> dialect();
 
         /**
          * The batch size.
          *
          * @see Config#getBatchSize()
          */
-        @ConfigItem(defaultValue = "0")
-        public int batchSize = 0;
+        @WithDefault(DefaultDataSourceBuildTimeConfig.DEFAULT_BATCH_SIZE)
+        int batchSize();
 
         /**
          * The fetch size.
          *
          * @see Config#getFetchSize()
          */
-        @ConfigItem(defaultValue = "0")
-        public int fetchSize = 0;
+        @WithDefault(DefaultDataSourceBuildTimeConfig.DEFAULT_FETCH_SIZE)
+        int fetchSize();
 
         /**
          * The max rows.
          *
          * @see Config#getMaxRows()
          */
-        @ConfigItem(defaultValue = "0")
-        public int maxRows = 0;
+        @WithDefault(DefaultDataSourceBuildTimeConfig.DEFAULT_MAX_ROWS)
+        int maxRows();
 
         /**
          * The query timeout limit in seconds.
          *
          * @see Config#getQueryTimeout()
          */
-        @ConfigItem(defaultValue = "0")
-        public int queryTimeout = 0;
+        @WithDefault(DefaultDataSourceBuildTimeConfig.DEFAULT_QUERY_TIMEOUT)
+        int queryTimeout();
 
         /**
          * Name of the file containing the SQL statements to execute when Doma starts. Its default value
@@ -109,41 +109,6 @@ public class DomaBuildTimeConfig {
          * Pass an explicit value to force Doma to execute the SQL import file.
          */
         @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-        @ConfigItem(defaultValueDocumentation = "import.sql in DEV, TEST ; no-file otherwise")
-        public Optional<String> sqlLoadScript = Optional.empty();
-
-        @Override
-        public String toString() {
-            return "DataSourceBuildTimeConfig{"
-                    + "dialect="
-                    + dialect
-                    + ", batchSize="
-                    + batchSize
-                    + ", fetchSize="
-                    + fetchSize
-                    + ", maxRows="
-                    + maxRows
-                    + ", queryTimeout="
-                    + queryTimeout
-                    + ", sqlLoadScript="
-                    + sqlLoadScript
-                    + '}';
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "DomaBuildTimeConfig{"
-                + "defaultDataSource="
-                + defaultDataSource
-                + ", namedDataSources="
-                + namedDataSources
-                + ", sqlFileRepository="
-                + sqlFileRepository
-                + ", naming="
-                + naming
-                + ", exceptionSqlLogType="
-                + exceptionSqlLogType
-                + '}';
+        Optional<String> sqlLoadScript();
     }
 }

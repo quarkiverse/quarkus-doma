@@ -42,9 +42,9 @@ public class DomaSettingsFactory {
 
     DomaSettings create() {
         DomaSettings settings = new DomaSettings();
-        settings.sqlFileRepository = buildTimeConfig.sqlFileRepository;
-        settings.naming = buildTimeConfig.naming;
-        settings.exceptionSqlLogType = buildTimeConfig.exceptionSqlLogType;
+        settings.sqlFileRepository = buildTimeConfig.sqlFileRepository();
+        settings.naming = buildTimeConfig.naming();
+        settings.exceptionSqlLogType = buildTimeConfig.exceptionSqlLogType();
         settings.dataSources = dataSources();
         if (dataSources.isEmpty()) {
             throw new IllegalStateException("The quarkus.datasource is empty. Specify it.");
@@ -68,11 +68,11 @@ public class DomaSettingsFactory {
                             JdbcDataSourceBuildItem dataSource = e.getValue();
                             DomaBuildTimeConfig.DataSourceBuildTimeConfig dataSourceBuildTimeConfig;
                             if (dataSource.isDefault()) {
-                                dataSourceBuildTimeConfig = buildTimeConfig.defaultDataSource;
+                                dataSourceBuildTimeConfig = buildTimeConfig.defaultDataSource();
                             } else {
-                                dataSourceBuildTimeConfig = buildTimeConfig.namedDataSources.get(name);
+                                dataSourceBuildTimeConfig = buildTimeConfig.namedDataSources().get(name);
                                 if (dataSourceBuildTimeConfig == null) {
-                                    dataSourceBuildTimeConfig = new DomaBuildTimeConfig.DataSourceBuildTimeConfig();
+                                    dataSourceBuildTimeConfig = new DefaultDataSourceBuildTimeConfig();
                                 }
                             }
                             return createDataSourceSettings(dataSource, dataSourceBuildTimeConfig);
@@ -86,13 +86,13 @@ public class DomaSettingsFactory {
         DomaSettings.DataSourceSettings settings = new DomaSettings.DataSourceSettings();
         settings.name = dataSource.getName();
         settings.isDefault = dataSource.isDefault();
-        settings.dialect = dataSourceBuildTimeConfig.dialect.orElseGet(
+        settings.dialect = dataSourceBuildTimeConfig.dialect().orElseGet(
                 () -> resolveDialectType(dataSource.getDbKind()));
-        settings.batchSize = dataSourceBuildTimeConfig.batchSize;
-        settings.fetchSize = dataSourceBuildTimeConfig.fetchSize;
-        settings.maxRows = dataSourceBuildTimeConfig.maxRows;
-        settings.queryTimeout = dataSourceBuildTimeConfig.queryTimeout;
-        settings.sqlLoadScript = resolveSqlLoadScript(dataSourceBuildTimeConfig.sqlLoadScript);
+        settings.batchSize = dataSourceBuildTimeConfig.batchSize();
+        settings.fetchSize = dataSourceBuildTimeConfig.fetchSize();
+        settings.maxRows = dataSourceBuildTimeConfig.maxRows();
+        settings.queryTimeout = dataSourceBuildTimeConfig.queryTimeout();
+        settings.sqlLoadScript = resolveSqlLoadScript(dataSourceBuildTimeConfig.sqlLoadScript());
         return settings;
     }
 
