@@ -1,19 +1,21 @@
-:summaryTableId: quarkus-doma_quarkus-doma
+
+:summaryTableId: quarkus-doma
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[.header-title]##Configuration property##
+h|[[quarkus-doma_configuration]]link:#quarkus-doma_configuration[Configuration property]
+
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-dialect]] [.property-path]##`quarkus.doma.dialect`##
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.dialect]]`link:#quarkus-doma_quarkus.doma.dialect[quarkus.doma.dialect]`
+
 
 [.description]
 --
 The SQL dialect.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_DIALECT+++[]
@@ -21,16 +23,17 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_DIALECT+++`
 endif::add-copy-button-to-env-var[]
---
-a|DialectType
-|
+-- a|
+`db2`, `h2`, `mssql`, `mysql`, `oracle`, `postgres`, `standard`, `sqlite` 
+|`depends on 'quarkus.datasource.db-kind'`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-batch-size]] [.property-path]##`quarkus.doma.batch-size`##
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.batch-size]]`link:#quarkus-doma_quarkus.doma.batch-size[quarkus.doma.batch-size]`
+
 
 [.description]
 --
 The batch size.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_BATCH_SIZE+++[]
@@ -38,16 +41,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_BATCH_SIZE+++`
 endif::add-copy-button-to-env-var[]
---
-|int
+--|int 
 |`0`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-fetch-size]] [.property-path]##`quarkus.doma.fetch-size`##
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.fetch-size]]`link:#quarkus-doma_quarkus.doma.fetch-size[quarkus.doma.fetch-size]`
+
 
 [.description]
 --
 The fetch size.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_FETCH_SIZE+++[]
@@ -55,16 +58,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_FETCH_SIZE+++`
 endif::add-copy-button-to-env-var[]
---
-|int
+--|int 
 |`0`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-max-rows]] [.property-path]##`quarkus.doma.max-rows`##
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.max-rows]]`link:#quarkus-doma_quarkus.doma.max-rows[quarkus.doma.max-rows]`
+
 
 [.description]
 --
 The max rows.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_MAX_ROWS+++[]
@@ -72,16 +75,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_MAX_ROWS+++`
 endif::add-copy-button-to-env-var[]
---
-|int
+--|int 
 |`0`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-query-timeout]] [.property-path]##`quarkus.doma.query-timeout`##
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.query-timeout]]`link:#quarkus-doma_quarkus.doma.query-timeout[quarkus.doma.query-timeout]`
+
 
 [.description]
 --
 The query timeout limit in seconds.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_QUERY_TIMEOUT+++[]
@@ -89,18 +92,18 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_QUERY_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
---
-|int
+--|int 
 |`0`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-sql-load-script]] [.property-path]##`quarkus.doma.sql-load-script`##
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.sql-load-script]]`link:#quarkus-doma_quarkus.doma.sql-load-script[quarkus.doma.sql-load-script]`
+
 
 [.description]
 --
 Name of the file containing the SQL statements to execute when Doma starts. Its default value differs depending on the Quarkus launch mode:
 
 ++*++ In dev and test modes, it defaults to `import.sql`. Simply add an `import.sql` file in the root of your resources directory and it will be picked up without having to set this property. Pass `no-file` to force Doma to ignore the SQL import file. ++*++ In production mode, it defaults to `no-file`. It means Doma won't try to execute any SQL import file by default. Pass an explicit value to force Doma to execute the SQL import file.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_SQL_LOAD_SCRIPT+++[]
@@ -108,125 +111,16 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_SQL_LOAD_SCRIPT+++`
 endif::add-copy-button-to-env-var[]
---
-|string
-|
-
-h|[[quarkus-doma_section_quarkus-doma]] [.section-name.section-level0]##Additional named datasources##
-h|Type
-h|Default
-
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-datasource-name-dialect]] [.property-path]##`quarkus.doma."datasource-name".dialect`##
-
-[.description]
---
-The SQL dialect.
+--|string 
+|`import.sql in DEV, TEST ; no-file otherwise`
 
 
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__DIALECT+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__DIALECT+++`
-endif::add-copy-button-to-env-var[]
---
-a|DialectType
-|
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.sql-file-repository]]`link:#quarkus-doma_quarkus.doma.sql-file-repository[quarkus.doma.sql-file-repository]`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-datasource-name-batch-size]] [.property-path]##`quarkus.doma."datasource-name".batch-size`##
-
-[.description]
---
-The batch size.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__BATCH_SIZE+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__BATCH_SIZE+++`
-endif::add-copy-button-to-env-var[]
---
-|int
-|`0`
-
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-datasource-name-fetch-size]] [.property-path]##`quarkus.doma."datasource-name".fetch-size`##
-
-[.description]
---
-The fetch size.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__FETCH_SIZE+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__FETCH_SIZE+++`
-endif::add-copy-button-to-env-var[]
---
-|int
-|`0`
-
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-datasource-name-max-rows]] [.property-path]##`quarkus.doma."datasource-name".max-rows`##
-
-[.description]
---
-The max rows.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__MAX_ROWS+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__MAX_ROWS+++`
-endif::add-copy-button-to-env-var[]
---
-|int
-|`0`
-
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-datasource-name-query-timeout]] [.property-path]##`quarkus.doma."datasource-name".query-timeout`##
-
-[.description]
---
-The query timeout limit in seconds.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__QUERY_TIMEOUT+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__QUERY_TIMEOUT+++`
-endif::add-copy-button-to-env-var[]
---
-|int
-|`0`
-
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-datasource-name-sql-load-script]] [.property-path]##`quarkus.doma."datasource-name".sql-load-script`##
-
-[.description]
---
-Name of the file containing the SQL statements to execute when Doma starts. Its default value differs depending on the Quarkus launch mode:
-
-++*++ In dev and test modes, it defaults to `import.sql`. Simply add an `import.sql` file in the root of your resources directory and it will be picked up without having to set this property. Pass `no-file` to force Doma to ignore the SQL import file. ++*++ In production mode, it defaults to `no-file`. It means Doma won't try to execute any SQL import file by default. Pass an explicit value to force Doma to execute the SQL import file.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__SQL_LOAD_SCRIPT+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__SQL_LOAD_SCRIPT+++`
-endif::add-copy-button-to-env-var[]
---
-|string
-|
-
-
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-sql-file-repository]] [.property-path]##`quarkus.doma.sql-file-repository`##
 
 [.description]
 --
 The SQL file repository.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_SQL_FILE_REPOSITORY+++[]
@@ -234,16 +128,17 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_SQL_FILE_REPOSITORY+++`
 endif::add-copy-button-to-env-var[]
---
-a|SqlFileRepositoryType
+-- a|
+`no-cache`, `greedy-cache` 
 |`greedy-cache`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-naming]] [.property-path]##`quarkus.doma.naming`##
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.naming]]`link:#quarkus-doma_quarkus.doma.naming[quarkus.doma.naming]`
+
 
 [.description]
 --
 The naming convention controller.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_NAMING+++[]
@@ -251,16 +146,17 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_NAMING+++`
 endif::add-copy-button-to-env-var[]
---
-a|NamingType
+-- a|
+`none`, `lower-case`, `upper-case`, `snake-lower-case`, `snake-upper-case` 
 |`none`
 
-a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus-doma-exception-sql-log-type]] [.property-path]##`quarkus.doma.exception-sql-log-type`##
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.exception-sql-log-type]]`link:#quarkus-doma_quarkus.doma.exception-sql-log-type[quarkus.doma.exception-sql-log-type]`
+
 
 [.description]
 --
 The SQL log type that determines the SQL log format in exceptions.
-
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA_EXCEPTION_SQL_LOG_TYPE+++[]
@@ -268,11 +164,118 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_DOMA_EXCEPTION_SQL_LOG_TYPE+++`
 endif::add-copy-button-to-env-var[]
---
-a|SqlLogType
+-- a|
+`raw`, `formatted`, `none` 
 |`none`
 
+
+h|[[quarkus-doma_quarkus.doma.named-data-sources-additional-named-datasources]]link:#quarkus-doma_quarkus.doma.named-data-sources-additional-named-datasources[Additional named datasources]
+
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.-datasource-name-.dialect]]`link:#quarkus-doma_quarkus.doma.-datasource-name-.dialect[quarkus.doma."datasource-name".dialect]`
+
+
+[.description]
+--
+The SQL dialect.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__DIALECT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__DIALECT+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+`db2`, `h2`, `mssql`, `mysql`, `oracle`, `postgres`, `standard`, `sqlite` 
+|`depends on 'quarkus.datasource.db-kind'`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.-datasource-name-.batch-size]]`link:#quarkus-doma_quarkus.doma.-datasource-name-.batch-size[quarkus.doma."datasource-name".batch-size]`
+
+
+[.description]
+--
+The batch size.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__BATCH_SIZE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__BATCH_SIZE+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`0`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.-datasource-name-.fetch-size]]`link:#quarkus-doma_quarkus.doma.-datasource-name-.fetch-size[quarkus.doma."datasource-name".fetch-size]`
+
+
+[.description]
+--
+The fetch size.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__FETCH_SIZE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__FETCH_SIZE+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`0`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.-datasource-name-.max-rows]]`link:#quarkus-doma_quarkus.doma.-datasource-name-.max-rows[quarkus.doma."datasource-name".max-rows]`
+
+
+[.description]
+--
+The max rows.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__MAX_ROWS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__MAX_ROWS+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`0`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.-datasource-name-.query-timeout]]`link:#quarkus-doma_quarkus.doma.-datasource-name-.query-timeout[quarkus.doma."datasource-name".query-timeout]`
+
+
+[.description]
+--
+The query timeout limit in seconds.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__QUERY_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__QUERY_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`0`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-doma_quarkus.doma.-datasource-name-.sql-load-script]]`link:#quarkus-doma_quarkus.doma.-datasource-name-.sql-load-script[quarkus.doma."datasource-name".sql-load-script]`
+
+
+[.description]
+--
+Name of the file containing the SQL statements to execute when Doma starts. Its default value differs depending on the Quarkus launch mode:
+
+++*++ In dev and test modes, it defaults to `import.sql`. Simply add an `import.sql` file in the root of your resources directory and it will be picked up without having to set this property. Pass `no-file` to force Doma to ignore the SQL import file. ++*++ In production mode, it defaults to `no-file`. It means Doma won't try to execute any SQL import file by default. Pass an explicit value to force Doma to execute the SQL import file.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOMA__DATASOURCE_NAME__SQL_LOAD_SCRIPT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOMA__DATASOURCE_NAME__SQL_LOAD_SCRIPT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`import.sql in DEV, TEST ; no-file otherwise`
+
 |===
-
-
-:!summaryTableId:
