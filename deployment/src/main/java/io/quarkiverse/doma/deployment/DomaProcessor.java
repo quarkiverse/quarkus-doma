@@ -44,6 +44,7 @@ import io.quarkus.deployment.builditem.HotDeploymentWatchedFileBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 class DomaProcessor {
 
@@ -149,6 +150,13 @@ class DomaProcessor {
                 NativeSql.class,
                 NativeSql.class,
                 recorder::configureNativeSql);
+
+        registerSyntheticBeans(
+                domaSettings.dataSources,
+                syntheticBeans,
+                QueryDsl.class,
+                QueryDsl.class,
+                recorder::configureQuerySql);
     }
 
     private <BEAN> void registerSyntheticBeans(
