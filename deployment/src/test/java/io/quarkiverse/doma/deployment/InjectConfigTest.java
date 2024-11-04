@@ -21,6 +21,7 @@ import org.seasar.doma.jdbc.criteria.NativeSql;
 
 import io.quarkiverse.doma.runtime.ScriptExecutor;
 import io.quarkus.test.QuarkusUnitTest;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 public class InjectConfigTest {
 
@@ -43,6 +44,8 @@ public class InjectConfigTest {
     Entityql entityql;
     @Inject
     NativeSql nativeSql;
+    @Inject
+    QueryDsl queryDsl;
     @Inject
     ScriptExecutor scriptExecutor;
     @Inject
@@ -75,6 +78,7 @@ public class InjectConfigTest {
         assertEquals(0, config.getQueryTimeout());
         assertNotNull(entityql);
         assertNotNull(nativeSql);
+        assertNotNull(queryDsl);
         assertNotNull(scriptExecutor);
     }
 

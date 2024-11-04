@@ -20,6 +20,7 @@ import io.quarkus.arc.Arc;
 import io.quarkus.arc.runtime.BeanContainerListener;
 import io.quarkus.runtime.LaunchMode;
 import io.quarkus.runtime.annotations.Recorder;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 @Recorder
 public class DomaRecorder {
@@ -84,6 +85,14 @@ public class DomaRecorder {
         return () -> {
             Config config = resolveConfig(settings);
             return new NativeSql(config);
+        };
+    }
+
+    public Supplier<QueryDsl> configureQuerySql(DomaSettings.DataSourceSettings settings) {
+        Objects.requireNonNull(settings);
+        return () -> {
+            Config config = resolveConfig(settings);
+            return new QueryDsl(config);
         };
     }
 
