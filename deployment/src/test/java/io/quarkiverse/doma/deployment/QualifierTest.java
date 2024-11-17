@@ -18,6 +18,7 @@ import io.agroal.api.AgroalDataSource;
 import io.quarkiverse.doma.runtime.DomaConfig;
 import io.quarkus.agroal.DataSource;
 import io.quarkus.test.QuarkusUnitTest;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 public class QualifierTest {
 
@@ -66,6 +67,13 @@ public class QualifierTest {
     @DataSource("inventory")
     NativeSql inventoryNativeSql;
 
+    @Inject
+    QueryDsl queryDsl;
+
+    @Inject
+    @DataSource("inventory")
+    QueryDsl inventoryQueryDsl;
+
     @Test
     void testDataSource() {
         assertEquals(dataSource.toString(), config.getDataSource().toString());
@@ -82,5 +90,11 @@ public class QualifierTest {
     void testNativeSql() {
         assertNotNull(nativeSql);
         assertNotNull(inventoryNativeSql);
+    }
+
+    @Test
+    void testQueryDsl() {
+        assertNotNull(queryDsl);
+        assertNotNull(inventoryQueryDsl);
     }
 }
