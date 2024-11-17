@@ -18,10 +18,10 @@ import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 import io.quarkiverse.doma.runtime.ScriptExecutor;
 import io.quarkus.test.QuarkusUnitTest;
-import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 public class InjectConfigTest {
 

@@ -12,6 +12,7 @@ import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.ConfigSupport;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 import io.quarkiverse.doma.runtime.devmode.HotReplacementScriptFileLoader;
 import io.quarkiverse.doma.runtime.devmode.HotReplacementSqlFileRepository;
@@ -20,7 +21,6 @@ import io.quarkus.arc.Arc;
 import io.quarkus.arc.runtime.BeanContainerListener;
 import io.quarkus.runtime.LaunchMode;
 import io.quarkus.runtime.annotations.Recorder;
-import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 @Recorder
 public class DomaRecorder {

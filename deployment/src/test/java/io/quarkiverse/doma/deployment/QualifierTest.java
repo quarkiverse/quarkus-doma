@@ -13,12 +13,12 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 import io.agroal.api.AgroalDataSource;
 import io.quarkiverse.doma.runtime.DomaConfig;
 import io.quarkus.agroal.DataSource;
 import io.quarkus.test.QuarkusUnitTest;
-import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 public class QualifierTest {
 

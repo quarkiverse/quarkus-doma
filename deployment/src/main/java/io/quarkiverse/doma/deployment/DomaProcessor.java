@@ -18,6 +18,7 @@ import org.seasar.doma.DaoImplementation;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
+import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 import io.quarkiverse.doma.runtime.DataSourceNameResolver;
 import io.quarkiverse.doma.runtime.DataSourceResolver;
@@ -44,7 +45,6 @@ import io.quarkus.deployment.builditem.HotDeploymentWatchedFileBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
-import org.seasar.doma.jdbc.criteria.QueryDsl;
 
 class DomaProcessor {
 
