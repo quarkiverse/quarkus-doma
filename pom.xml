@@ -8,7 +8,7 @@
   </parent>
   <groupId>io.quarkiverse.doma</groupId>
   <artifactId>quarkus-doma-parent</artifactId>
-  <version>0.0.13-SNAPSHOT</version>
+  <version>0.0.13</version>
   <name>Quarkus - Doma - Parent</name>
   <packaging>pom</packaging>
   <properties>
@@ -25,7 +25,7 @@
     <connection>scm:git:git@github.com:quarkiverse/quarkus-doma.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-doma.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-doma</url>
-    <tag>HEAD</tag>
+    <tag>0.0.13</tag>
   </scm>
   <modules>
     <module>deployment</module>
