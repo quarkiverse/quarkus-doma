@@ -9,6 +9,7 @@ import org.seasar.doma.jdbc.ClassHelper;
 import org.seasar.doma.jdbc.CommandImplementors;
 import org.seasar.doma.jdbc.Commenter;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.DuplicateColumnHandler;
 import org.seasar.doma.jdbc.EntityListenerProvider;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.MapKeyNaming;
@@ -16,10 +17,12 @@ import org.seasar.doma.jdbc.Naming;
 import org.seasar.doma.jdbc.QueryImplementors;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.ScriptFileLoader;
+import org.seasar.doma.jdbc.SqlBuilderSettings;
 import org.seasar.doma.jdbc.SqlFileRepository;
 import org.seasar.doma.jdbc.SqlLogType;
 import org.seasar.doma.jdbc.UnknownColumnHandler;
 import org.seasar.doma.jdbc.dialect.Dialect;
+import org.seasar.doma.jdbc.statistic.StatisticManager;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 
 @SuppressWarnings("unused")
@@ -42,6 +45,9 @@ public class DomaConfig implements Config {
     private final Commenter commenter;
     private final EntityListenerProvider entityListenerProvider;
     private final TransactionManager transactionManager;
+    private final DuplicateColumnHandler duplicateColumnHandler;
+    private final SqlBuilderSettings sqlBuilderSettings;
+    private final StatisticManager statisticManager;
     private final int batchSize;
     private final int fetchSize;
     private final int maxRows;
@@ -64,7 +70,8 @@ public class DomaConfig implements Config {
             MapKeyNaming mapKeyNaming,
             Commenter commenter,
             EntityListenerProvider entityListenerProvider,
-            TransactionManager transactionManager,
+            TransactionManager transactionManager, DuplicateColumnHandler duplicateColumnHandler,
+            SqlBuilderSettings sqlBuilderSettings, StatisticManager statisticManager,
             int batchSize,
             int fetchSize,
             int maxRows,
@@ -86,6 +93,9 @@ public class DomaConfig implements Config {
         this.commenter = Objects.requireNonNull(commenter);
         this.entityListenerProvider = Objects.requireNonNull(entityListenerProvider);
         this.transactionManager = Objects.requireNonNull(transactionManager);
+        this.duplicateColumnHandler = duplicateColumnHandler;
+        this.sqlBuilderSettings = sqlBuilderSettings;
+        this.statisticManager = statisticManager;
         this.batchSize = batchSize;
         this.fetchSize = fetchSize;
         this.maxRows = maxRows;
@@ -205,6 +215,21 @@ public class DomaConfig implements Config {
         return queryTimeout;
     }
 
+    @Override
+    public DuplicateColumnHandler getDuplicateColumnHandler() {
+        return duplicateColumnHandler;
+    }
+
+    @Override
+    public SqlBuilderSettings getSqlBuilderSettings() {
+        return sqlBuilderSettings;
+    }
+
+    @Override
+    public StatisticManager getStatisticManager() {
+        return statisticManager;
+    }
+
     @SuppressWarnings("unused")
     public static Builder builder() {
         return new Builder();
@@ -255,6 +280,9 @@ public class DomaConfig implements Config {
         builder.setCommenter(core.getCommenter());
         builder.setEntityListenerProvider(core.getEntityListenerProvider());
         builder.setTransactionManager(core.getTransactionManager());
+        builder.setDuplicateColumnHandler(core.getDuplicateColumnHandler());
+        builder.setSqlBuilderSettings(core.getSqlBuilderSettings());
+        builder.setStatisticManager(core.getStatisticManager());
         return builder;
     }
 
@@ -273,6 +301,9 @@ public class DomaConfig implements Config {
         private final Commenter commenter;
         private final EntityListenerProvider entityListenerProvider;
         private final TransactionManager transactionManager;
+        private final DuplicateColumnHandler duplicateColumnHandler;
+        private final SqlBuilderSettings sqlBuilderSettings;
+        private final StatisticManager statisticManager;
 
         public Core(
                 SqlFileRepository sqlFileRepository,
@@ -288,7 +319,10 @@ public class DomaConfig implements Config {
                 MapKeyNaming mapKeyNaming,
                 Commenter commenter,
                 EntityListenerProvider entityListenerProvider,
-                TransactionManager transactionManager) {
+                TransactionManager transactionManager,
+                DuplicateColumnHandler duplicateColumnHandler,
+                SqlBuilderSettings sqlBuilderSettings,
+                StatisticManager statisticManager) {
             this.sqlFileRepository = Objects.requireNonNull(sqlFileRepository);
             this.scriptFileLoader = Objects.requireNonNull(scriptFileLoader);
             this.jdbcLogger = Objects.requireNonNull(jdbcLogger);
@@ -303,6 +337,9 @@ public class DomaConfig implements Config {
             this.commenter = Objects.requireNonNull(commenter);
             this.entityListenerProvider = Objects.requireNonNull(entityListenerProvider);
             this.transactionManager = Objects.requireNonNull(transactionManager);
+            this.duplicateColumnHandler = duplicateColumnHandler;
+            this.sqlBuilderSettings = sqlBuilderSettings;
+            this.statisticManager = statisticManager;
         }
 
         public SqlFileRepository getSqlFileRepository() {
@@ -360,6 +397,18 @@ public class DomaConfig implements Config {
         public TransactionManager getTransactionManager() {
             return transactionManager;
         }
+
+        public DuplicateColumnHandler getDuplicateColumnHandler() {
+            return duplicateColumnHandler;
+        }
+
+        public SqlBuilderSettings getSqlBuilderSettings() {
+            return sqlBuilderSettings;
+        }
+
+        public StatisticManager getStatisticManager() {
+            return statisticManager;
+        }
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -382,6 +431,9 @@ public class DomaConfig implements Config {
         private Commenter commenter;
         private EntityListenerProvider entityListenerProvider;
         private TransactionManager transactionManager;
+        private DuplicateColumnHandler duplicateColumnHandler;
+        private SqlBuilderSettings sqlBuilderSettings;
+        private StatisticManager statisticManager;
         private int batchSize;
         private int fetchSize;
         private int maxRows;
@@ -472,6 +524,18 @@ public class DomaConfig implements Config {
             return this;
         }
 
+        public void setDuplicateColumnHandler(DuplicateColumnHandler duplicateColumnHandler) {
+            this.duplicateColumnHandler = duplicateColumnHandler;
+        }
+
+        public void setSqlBuilderSettings(SqlBuilderSettings sqlBuilderSettings) {
+            this.sqlBuilderSettings = sqlBuilderSettings;
+        }
+
+        public void setStatisticManager(StatisticManager statisticManager) {
+            this.statisticManager = statisticManager;
+        }
+
         public Builder setBatchSize(int batchSize) {
             this.batchSize = batchSize;
             return this;
@@ -511,10 +575,10 @@ public class DomaConfig implements Config {
                     commenter,
                     entityListenerProvider,
                     transactionManager,
-                    batchSize,
-                    fetchSize,
-                    maxRows,
-                    queryTimeout);
+                    duplicateColumnHandler,
+                    sqlBuilderSettings,
+                    statisticManager,
+                    batchSize, fetchSize, maxRows, queryTimeout);
         }
     }
 }

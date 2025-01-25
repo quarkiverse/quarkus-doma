@@ -11,6 +11,7 @@ import org.seasar.doma.jdbc.ClassHelper;
 import org.seasar.doma.jdbc.CommandImplementors;
 import org.seasar.doma.jdbc.Commenter;
 import org.seasar.doma.jdbc.ConfigSupport;
+import org.seasar.doma.jdbc.DuplicateColumnHandler;
 import org.seasar.doma.jdbc.EntityListenerProvider;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.MapKeyNaming;
@@ -18,9 +19,11 @@ import org.seasar.doma.jdbc.Naming;
 import org.seasar.doma.jdbc.QueryImplementors;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.ScriptFileLoader;
+import org.seasar.doma.jdbc.SqlBuilderSettings;
 import org.seasar.doma.jdbc.SqlFileRepository;
 import org.seasar.doma.jdbc.SqlLogType;
 import org.seasar.doma.jdbc.UnknownColumnHandler;
+import org.seasar.doma.jdbc.statistic.StatisticManager;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 import org.seasar.doma.slf4j.Slf4jJdbcLogger;
 
@@ -120,6 +123,24 @@ public class DomaProducer {
 
     @Singleton
     @DefaultBean
+    DuplicateColumnHandler SqlBuilderSettings() {
+        return ConfigSupport.defaultDuplicateColumnHandler;
+    }
+
+    @Singleton
+    @DefaultBean
+    SqlBuilderSettings sqlBuilderSettings() {
+        return ConfigSupport.defaultSqlBuilderSettings;
+    }
+
+    @Singleton
+    @DefaultBean
+    StatisticManager statisticManager() {
+        return ConfigSupport.defaultStatisticManager;
+    }
+
+    @Singleton
+    @DefaultBean
     EntityListenerProvider entityListenerProvider() {
         return ConfigSupport.defaultEntityListenerProvider;
     }
@@ -153,7 +174,10 @@ public class DomaProducer {
             MapKeyNaming mapKeyNaming,
             Commenter commenter,
             EntityListenerProvider entityListenerProvider,
-            TransactionManager transactionManager) {
+            TransactionManager transactionManager,
+            DuplicateColumnHandler duplicateColumnHandler,
+            SqlBuilderSettings sqlBuilderSettings,
+            StatisticManager statisticManager) {
         return new DomaConfig.Core(
                 sqlFileRepository,
                 scriptFileLoader,
@@ -168,6 +192,9 @@ public class DomaProducer {
                 mapKeyNaming,
                 commenter,
                 entityListenerProvider,
-                transactionManager);
+                transactionManager,
+                duplicateColumnHandler,
+                sqlBuilderSettings,
+                statisticManager);
     }
 }
