@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.SqlBuilderSettings;
 import org.seasar.doma.jdbc.SqlLogType;
 
 import io.quarkiverse.doma.runtime.DomaSettings;
@@ -52,6 +53,17 @@ public class DomaBuildTimeConfig {
      */
     @ConfigItem(defaultValue = "none")
     public SqlLogType exceptionSqlLogType;
+
+    public SqlBuilderBuildTimeConfig sqlBuilderSettings;
+
+    /**
+     * An exception will be thrown if duplicate columns exist.
+     * If {@link org.seasar.doma.jdbc.DuplicateColumnHandler} is registered in CDI, this property will be ignored.
+     *
+     * @see Config#getDuplicateColumnHandler()
+     */
+    @ConfigItem(defaultValue = "false")
+    public boolean throwExceptionIfDuplicateColumn;
 
     @SuppressWarnings("CanBeFinal")
     @ConfigGroup
@@ -131,6 +143,37 @@ public class DomaBuildTimeConfig {
         }
     }
 
+    @SuppressWarnings("CanBeFinal")
+    @ConfigGroup
+    public static class SqlBuilderBuildTimeConfig {
+        /**
+         * Whether to remove blank lines from SQL.
+         * If {@link org.seasar.doma.jdbc.SqlBuilderSettings} is registered in CDI, this property will be ignored.
+         *
+         * @see SqlBuilderSettings#shouldRemoveBlankLines()
+         */
+        @ConfigItem(defaultValue = "false")
+        public boolean shouldRemoveBlankLines;
+        /**
+         * Whether to enable IN list padding.
+         * If {@link org.seasar.doma.jdbc.SqlBuilderSettings} is registered in CDI, this property will be ignored.
+         *
+         * @see SqlBuilderSettings#shouldRequireInListPadding()
+         */
+        @ConfigItem(defaultValue = "false")
+        public boolean shouldRequireInListPadding;
+
+        @Override
+        public String toString() {
+            return "SqlBuilderBuildTimeConfig{"
+                    + "shouldRemoveBlankLines="
+                    + shouldRemoveBlankLines
+                    + ", shouldRequireInListPadding="
+                    + shouldRequireInListPadding
+                    + '}';
+        }
+    }
+
     @Override
     public String toString() {
         return "DomaBuildTimeConfig{"
@@ -144,6 +187,10 @@ public class DomaBuildTimeConfig {
                 + naming
                 + ", exceptionSqlLogType="
                 + exceptionSqlLogType
+                + ", sqlBuilderSettings="
+                + sqlBuilderSettings
+                + ", throwExceptionIfDuplicateColumn="
+                + throwExceptionIfDuplicateColumn
                 + '}';
     }
 }
