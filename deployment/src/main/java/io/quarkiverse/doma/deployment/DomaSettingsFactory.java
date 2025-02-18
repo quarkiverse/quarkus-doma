@@ -1,17 +1,13 @@
 package io.quarkiverse.doma.deployment;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
 
 import org.jboss.logging.Logger;
 
@@ -42,9 +38,9 @@ public class DomaSettingsFactory {
 
     DomaSettings create() {
         DomaSettings settings = new DomaSettings();
-        settings.sqlFileRepository = buildTimeConfig.sqlFileRepository;
-        settings.naming = buildTimeConfig.naming;
-        settings.exceptionSqlLogType = buildTimeConfig.exceptionSqlLogType;
+        settings.sqlFileRepository = buildTimeConfig.sqlFileRepository();
+        settings.naming = buildTimeConfig.naming();
+        settings.exceptionSqlLogType = buildTimeConfig.exceptionSqlLogType();
         settings.dataSources = dataSources();
         if (dataSources.isEmpty()) {
             throw new IllegalStateException("The quarkus.datasource is empty. Specify it.");
@@ -59,30 +55,9 @@ public class DomaSettingsFactory {
     }
 
     private List<DomaSettings.DataSourceSettings> dataSources() {
-        Map<String, JdbcDataSourceBuildItem> namedDataSources = dataSources.stream()
-                .collect(
-                        toMap(
-                                JdbcDataSourceBuildItem::getName,
-                                Function.identity(),
-                                (a, b) -> a,
-                                LinkedHashMap::new));
-        return namedDataSources.entrySet().stream()
-                .map(
-                        e -> {
-                            String name = e.getKey();
-                            JdbcDataSourceBuildItem dataSource = e.getValue();
-                            DomaBuildTimeConfig.DataSourceBuildTimeConfig dataSourceBuildTimeConfig;
-                            if (dataSource.isDefault()) {
-                                dataSourceBuildTimeConfig = buildTimeConfig.defaultDataSource;
-                            } else {
-                                dataSourceBuildTimeConfig = buildTimeConfig.namedDataSources.get(name);
-                                if (dataSourceBuildTimeConfig == null) {
-                                    dataSourceBuildTimeConfig = new DomaBuildTimeConfig.DataSourceBuildTimeConfig();
-                                }
-                            }
-                            return createDataSourceSettings(dataSource, dataSourceBuildTimeConfig);
-                        })
-                .collect(toList());
+        return dataSources.stream()
+                .map(ds -> createDataSourceSettings(ds, buildTimeConfig.dataSources().get(ds.getName())))
+                .toList();
     }
 
     private DomaSettings.DataSourceSettings createDataSourceSettings(
@@ -91,13 +66,13 @@ public class DomaSettingsFactory {
         DomaSettings.DataSourceSettings settings = new DomaSettings.DataSourceSettings();
         settings.name = dataSource.getName();
         settings.isDefault = dataSource.isDefault();
-        settings.dialect = dataSourceBuildTimeConfig.dialect.orElseGet(
+        settings.dialect = dataSourceBuildTimeConfig.dialect().orElseGet(
                 () -> resolveDialectType(dataSource.getDbKind()));
-        settings.batchSize = dataSourceBuildTimeConfig.batchSize;
-        settings.fetchSize = dataSourceBuildTimeConfig.fetchSize;
-        settings.maxRows = dataSourceBuildTimeConfig.maxRows;
-        settings.queryTimeout = dataSourceBuildTimeConfig.queryTimeout;
-        settings.sqlLoadScript = resolveSqlLoadScript(dataSourceBuildTimeConfig.sqlLoadScript);
+        settings.batchSize = dataSourceBuildTimeConfig.batchSize();
+        settings.fetchSize = dataSourceBuildTimeConfig.fetchSize();
+        settings.maxRows = dataSourceBuildTimeConfig.maxRows();
+        settings.queryTimeout = dataSourceBuildTimeConfig.queryTimeout();
+        settings.sqlLoadScript = resolveSqlLoadScript(dataSourceBuildTimeConfig.sqlLoadScript());
         return settings;
     }
 
