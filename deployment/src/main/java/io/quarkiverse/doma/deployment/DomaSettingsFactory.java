@@ -46,10 +46,10 @@ public class DomaSettingsFactory {
             throw new IllegalStateException("The quarkus.datasource is empty. Specify it.");
         }
         DomaSettings.SqlBuilderSettings sqlBuilderSettings = new DomaSettings.SqlBuilderSettings();
-        sqlBuilderSettings.shouldRemoveBlankLines = buildTimeConfig.sqlBuilderSettings.shouldRemoveBlankLines;
-        sqlBuilderSettings.shouldRequireInListPadding = buildTimeConfig.sqlBuilderSettings.shouldRequireInListPadding;
+        sqlBuilderSettings.shouldRemoveBlankLines = buildTimeConfig.sqlBuilderSettings().shouldRemoveBlankLines();
+        sqlBuilderSettings.shouldRequireInListPadding = buildTimeConfig.sqlBuilderSettings().shouldRequireInListPadding();
         settings.sqlBuilderSettings = sqlBuilderSettings;
-        settings.throwExceptionIfDuplicateColumn = buildTimeConfig.throwExceptionIfDuplicateColumn;
+        settings.throwExceptionIfDuplicateColumn = buildTimeConfig.throwExceptionIfDuplicateColumn();
         logger.debugf("settings: %s", settings);
         return settings;
     }

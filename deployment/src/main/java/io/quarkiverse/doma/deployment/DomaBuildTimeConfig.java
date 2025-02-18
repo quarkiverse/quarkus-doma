@@ -59,7 +59,7 @@ public interface DomaBuildTimeConfig {
     @WithDefault("none")
     SqlLogType exceptionSqlLogType();
 
-    public SqlBuilderBuildTimeConfig sqlBuilderSettings;
+    SqlBuilderBuildTimeConfig sqlBuilderSettings();
 
     /**
      * An exception will be thrown if duplicate columns exist.
@@ -67,10 +67,9 @@ public interface DomaBuildTimeConfig {
      *
      * @see Config#getDuplicateColumnHandler()
      */
-    @ConfigItem(defaultValue = "false")
-    public boolean throwExceptionIfDuplicateColumn;
+    @WithDefault("false")
+    boolean throwExceptionIfDuplicateColumn();
 
-    @SuppressWarnings("CanBeFinal")
     @ConfigGroup
     public interface DataSourceBuildTimeConfig {
         /**
@@ -126,5 +125,26 @@ public interface DomaBuildTimeConfig {
          */
         @ConfigDocDefault("import.sql in DEV, TEST ; no-file otherwise")
         Optional<String> sqlLoadScript();
+    }
+
+    @ConfigGroup
+    public interface SqlBuilderBuildTimeConfig {
+        /**
+         * Whether to remove blank lines from SQL.
+         * If {@link org.seasar.doma.jdbc.SqlBuilderSettings} is registered in CDI, this property will be ignored.
+         *
+         * @see SqlBuilderSettings#shouldRemoveBlankLines()
+         */
+        @WithDefault("false")
+        boolean shouldRemoveBlankLines();
+
+        /**
+         * Whether to enable IN list padding.
+         * If {@link org.seasar.doma.jdbc.SqlBuilderSettings} is registered in CDI, this property will be ignored.
+         *
+         * @see SqlBuilderSettings#shouldRequireInListPadding()
+         */
+        @WithDefault("false")
+        boolean shouldRequireInListPadding();
     }
 }
