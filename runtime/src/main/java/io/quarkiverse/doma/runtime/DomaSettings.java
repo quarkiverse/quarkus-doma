@@ -28,11 +28,26 @@ public class DomaSettings {
     public NamingType naming;
     public SqlLogType exceptionSqlLogType;
     public List<DataSourceSettings> dataSources;
+    public SqlBuilderSettings sqlBuilderSettings;
+    public boolean throwExceptionIfDuplicateColumn;
 
     public Map<String, String> asNamedSqlLoadScripts() {
         return dataSources.stream()
                 .filter(it -> it.sqlLoadScript != null)
                 .collect(toMap(it -> it.name, it -> it.sqlLoadScript, (a, b) -> a, LinkedHashMap::new));
+    }
+
+    public static class SqlBuilderSettings {
+        public boolean shouldRemoveBlankLines;
+        public boolean shouldRequireInListPadding;
+
+        @Override
+        public String toString() {
+            return "SqlBuilderSettings{" +
+                    "shouldRemoveBlankLines=" + shouldRemoveBlankLines +
+                    ", shouldRequireInListPadding=" + shouldRequireInListPadding +
+                    '}';
+        }
     }
 
     public static class DataSourceSettings {
@@ -135,6 +150,10 @@ public class DomaSettings {
                 + exceptionSqlLogType
                 + ", dataSources="
                 + dataSources
+                + ", sqlBuilderSettings="
+                + sqlBuilderSettings
+                + ", throwExceptionIfDuplicateColumn="
+                + throwExceptionIfDuplicateColumn
                 + '}';
     }
 }

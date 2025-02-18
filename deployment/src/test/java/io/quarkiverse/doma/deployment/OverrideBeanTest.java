@@ -15,9 +15,14 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.seasar.doma.jdbc.CommentContext;
 import org.seasar.doma.jdbc.Commenter;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.DuplicateColumnHandler;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.NoCacheSqlFileRepository;
+import org.seasar.doma.jdbc.Sql;
+import org.seasar.doma.jdbc.SqlBuilderSettings;
 import org.seasar.doma.jdbc.SqlFileRepository;
+import org.seasar.doma.jdbc.statistic.Statistic;
+import org.seasar.doma.jdbc.statistic.StatisticManager;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
 import org.seasar.doma.jdbc.tx.LocalTransactionManager;
 import org.seasar.doma.jdbc.tx.TransactionManager;
@@ -70,10 +75,52 @@ public class OverrideBeanTest {
         }
     }
 
+    @Singleton
+    @Unremovable
+    static class MyDuplicateColumnHandler implements DuplicateColumnHandler {
+    }
+
+    @Singleton
+    @Unremovable
+    static class MySqlBuilderSettings implements SqlBuilderSettings {
+    }
+
+    @Singleton
+    @Unremovable
+    static class MyStatisticManager implements StatisticManager {
+        @Override
+        public boolean isEnabled() {
+            return false;
+        }
+
+        @Override
+        public void setEnabled(boolean b) {
+
+        }
+
+        @Override
+        public Iterable<Statistic> getStatistics() {
+            return null;
+        }
+
+        @Override
+        public void recordSqlExecution(Sql<?> sql, long l, long l1) {
+
+        }
+
+        @Override
+        public void clear() {
+
+        }
+    }
+
     @Test
     void test() {
         assertTrue(config.getCommenter() instanceof MyCommenter);
         assertTrue(config.getSqlFileRepository() instanceof NoCacheSqlFileRepository);
         assertTrue(config.getTransactionManager() instanceof LocalTransactionManager);
+        assertTrue(config.getDuplicateColumnHandler() instanceof MyDuplicateColumnHandler);
+        assertTrue(config.getSqlBuilderSettings() instanceof MySqlBuilderSettings);
+        assertTrue(config.getStatisticManager() instanceof MyStatisticManager);
     }
 }

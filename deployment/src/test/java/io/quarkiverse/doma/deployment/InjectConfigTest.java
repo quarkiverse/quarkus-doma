@@ -1,6 +1,7 @@
 package io.quarkiverse.doma.deployment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,6 +16,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.ConfigSupport;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
@@ -80,6 +82,9 @@ public class InjectConfigTest {
         assertNotNull(nativeSql);
         assertNotNull(queryDsl);
         assertNotNull(scriptExecutor);
+        assertFalse(config.getSqlBuilderSettings().shouldRemoveBlankLines());
+        assertFalse(config.getSqlBuilderSettings().shouldRequireInListPadding());
+        assertEquals(config.getDuplicateColumnHandler().getClass(), ConfigSupport.defaultDuplicateColumnHandler.getClass());
     }
 
     @Test
