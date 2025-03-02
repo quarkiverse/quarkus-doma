@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.SqlBuilderSettings;
 import org.seasar.doma.jdbc.SqlLogType;
 
 import io.quarkiverse.doma.runtime.DomaSettings;
@@ -58,7 +59,17 @@ public interface DomaBuildTimeConfig {
     @WithDefault("none")
     SqlLogType exceptionSqlLogType();
 
-    @SuppressWarnings("CanBeFinal")
+    SqlBuilderSettingsBuildTimeConfig sqlBuilderSettings();
+
+    /**
+     * An exception will be thrown if duplicate columns exist.
+     * If {@link org.seasar.doma.jdbc.DuplicateColumnHandler} is registered in CDI, this property will be ignored.
+     *
+     * @see Config#getDuplicateColumnHandler()
+     */
+    @WithDefault("false")
+    boolean throwExceptionIfDuplicateColumn();
+
     @ConfigGroup
     public interface DataSourceBuildTimeConfig {
         /**
@@ -114,5 +125,26 @@ public interface DomaBuildTimeConfig {
          */
         @ConfigDocDefault("import.sql in DEV, TEST ; no-file otherwise")
         Optional<String> sqlLoadScript();
+    }
+
+    @ConfigGroup
+    public interface SqlBuilderSettingsBuildTimeConfig {
+        /**
+         * Whether to remove blank lines from SQL.
+         * If {@link org.seasar.doma.jdbc.SqlBuilderSettings} is registered in CDI, this property will be ignored.
+         *
+         * @see SqlBuilderSettings#shouldRemoveBlankLines()
+         */
+        @WithDefault("false")
+        boolean shouldRemoveBlankLines();
+
+        /**
+         * Whether to enable IN list padding.
+         * If {@link org.seasar.doma.jdbc.SqlBuilderSettings} is registered in CDI, this property will be ignored.
+         *
+         * @see SqlBuilderSettings#shouldRequireInListPadding()
+         */
+        @WithDefault("false")
+        boolean shouldRequireInListPadding();
     }
 }

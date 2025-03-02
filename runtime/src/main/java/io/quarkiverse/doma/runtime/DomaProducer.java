@@ -11,6 +11,7 @@ import org.seasar.doma.jdbc.ClassHelper;
 import org.seasar.doma.jdbc.CommandImplementors;
 import org.seasar.doma.jdbc.Commenter;
 import org.seasar.doma.jdbc.ConfigSupport;
+import org.seasar.doma.jdbc.DuplicateColumnHandler;
 import org.seasar.doma.jdbc.EntityListenerProvider;
 import org.seasar.doma.jdbc.JdbcLogger;
 import org.seasar.doma.jdbc.MapKeyNaming;
@@ -18,9 +19,11 @@ import org.seasar.doma.jdbc.Naming;
 import org.seasar.doma.jdbc.QueryImplementors;
 import org.seasar.doma.jdbc.RequiresNewController;
 import org.seasar.doma.jdbc.ScriptFileLoader;
+import org.seasar.doma.jdbc.SqlBuilderSettings;
 import org.seasar.doma.jdbc.SqlFileRepository;
 import org.seasar.doma.jdbc.SqlLogType;
 import org.seasar.doma.jdbc.UnknownColumnHandler;
+import org.seasar.doma.jdbc.statistic.StatisticManager;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 import org.seasar.doma.slf4j.Slf4jJdbcLogger;
 
@@ -36,6 +39,8 @@ public class DomaProducer {
     private volatile Naming naming;
     private volatile SqlLogType exceptionSqlLogType;
     private volatile Map<String, String> namedSqlLoadScripts;
+    private volatile SqlBuilderSettings sqlBuilderSettings;
+    private volatile DuplicateColumnHandler duplicateColumnHandler;
 
     public void setSqlFileRepository(SqlFileRepository sqlFileRepository) {
         this.sqlFileRepository = Objects.requireNonNull(sqlFileRepository);
@@ -58,6 +63,14 @@ public class DomaProducer {
         this.namedSqlLoadScripts = Collections.unmodifiableMap(namedSqlLoadScripts);
     }
 
+    public void setSqlBuilderSettings(SqlBuilderSettings sqlBuilderSettings) {
+        this.sqlBuilderSettings = Objects.requireNonNull(sqlBuilderSettings);
+    }
+
+    public void setDuplicateColumnHandler(DuplicateColumnHandler duplicateColumnHandler) {
+        this.duplicateColumnHandler = duplicateColumnHandler;
+    }
+
     @Singleton
     @DefaultBean
     SqlFileRepository sqlFileRepository() {
@@ -68,6 +81,12 @@ public class DomaProducer {
     @DefaultBean
     ScriptFileLoader scriptFileLoader() {
         return Objects.requireNonNull(scriptFileLoader);
+    }
+
+    @Singleton
+    @DefaultBean
+    SqlBuilderSettings sqlBuilderSettings() {
+        return Objects.requireNonNull(sqlBuilderSettings);
     }
 
     @Singleton
@@ -120,6 +139,18 @@ public class DomaProducer {
 
     @Singleton
     @DefaultBean
+    DuplicateColumnHandler duplicateColumnHandler() {
+        return Objects.requireNonNull(duplicateColumnHandler);
+    }
+
+    @Singleton
+    @DefaultBean
+    StatisticManager statisticManager() {
+        return ConfigSupport.defaultStatisticManager;
+    }
+
+    @Singleton
+    @DefaultBean
     EntityListenerProvider entityListenerProvider() {
         return ConfigSupport.defaultEntityListenerProvider;
     }
@@ -153,7 +184,10 @@ public class DomaProducer {
             MapKeyNaming mapKeyNaming,
             Commenter commenter,
             EntityListenerProvider entityListenerProvider,
-            TransactionManager transactionManager) {
+            TransactionManager transactionManager,
+            DuplicateColumnHandler duplicateColumnHandler,
+            SqlBuilderSettings sqlBuilderSettings,
+            StatisticManager statisticManager) {
         return new DomaConfig.Core(
                 sqlFileRepository,
                 scriptFileLoader,
@@ -168,6 +202,9 @@ public class DomaProducer {
                 mapKeyNaming,
                 commenter,
                 entityListenerProvider,
-                transactionManager);
+                transactionManager,
+                duplicateColumnHandler,
+                sqlBuilderSettings,
+                statisticManager);
     }
 }

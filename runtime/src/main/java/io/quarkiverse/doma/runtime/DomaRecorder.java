@@ -10,6 +10,7 @@ import jakarta.enterprise.inject.Default;
 
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.ConfigSupport;
+import org.seasar.doma.jdbc.ThrowingDuplicateColumnHandler;
 import org.seasar.doma.jdbc.criteria.Entityql;
 import org.seasar.doma.jdbc.criteria.NativeSql;
 import org.seasar.doma.jdbc.criteria.QueryDsl;
@@ -46,7 +47,15 @@ public class DomaRecorder {
                 producer.setSqlFileRepository(domaSettings.sqlFileRepository.create());
                 producer.setScriptFileLoader(ConfigSupport.defaultScriptFileLoader);
             }
+            producer.setSqlBuilderSettings(new DefaultSqlBuilderSettings(
+                    domaSettings.sqlBuilderSettings.shouldRemoveBlankLines,
+                    domaSettings.sqlBuilderSettings.shouldRequireInListPadding));
 
+            if (domaSettings.throwExceptionIfDuplicateColumn) {
+                producer.setDuplicateColumnHandler(new ThrowingDuplicateColumnHandler());
+            } else {
+                producer.setDuplicateColumnHandler(ConfigSupport.defaultDuplicateColumnHandler);
+            }
             producer.setNaming(domaSettings.naming.naming());
             producer.setExceptionSqlLogType(domaSettings.exceptionSqlLogType);
             producer.setNamedSqlLoadScripts(domaSettings.asNamedSqlLoadScripts());
