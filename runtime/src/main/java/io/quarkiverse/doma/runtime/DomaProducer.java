@@ -140,7 +140,7 @@ public class DomaProducer {
     @Singleton
     @DefaultBean
     DuplicateColumnHandler duplicateColumnHandler() {
-        return duplicateColumnHandler;
+        return Objects.requireNonNull(duplicateColumnHandler);
     }
 
     @Singleton

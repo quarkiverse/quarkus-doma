@@ -59,7 +59,7 @@ public interface DomaBuildTimeConfig {
     @WithDefault("none")
     SqlLogType exceptionSqlLogType();
 
-    SqlBuilderBuildTimeConfig sqlBuilderSettings();
+    SqlBuilderSettingsBuildTimeConfig sqlBuilderSettings();
 
     /**
      * An exception will be thrown if duplicate columns exist.
@@ -128,7 +128,7 @@ public interface DomaBuildTimeConfig {
     }
 
     @ConfigGroup
-    public interface SqlBuilderBuildTimeConfig {
+    public interface SqlBuilderSettingsBuildTimeConfig {
         /**
          * Whether to remove blank lines from SQL.
          * If {@link org.seasar.doma.jdbc.SqlBuilderSettings} is registered in CDI, this property will be ignored.

@@ -93,9 +93,9 @@ public class DomaConfig implements Config {
         this.commenter = Objects.requireNonNull(commenter);
         this.entityListenerProvider = Objects.requireNonNull(entityListenerProvider);
         this.transactionManager = Objects.requireNonNull(transactionManager);
-        this.duplicateColumnHandler = duplicateColumnHandler;
-        this.sqlBuilderSettings = sqlBuilderSettings;
-        this.statisticManager = statisticManager;
+        this.duplicateColumnHandler = Objects.requireNonNull(duplicateColumnHandler);
+        this.sqlBuilderSettings = Objects.requireNonNull(sqlBuilderSettings);
+        this.statisticManager = Objects.requireNonNull(statisticManager);
         this.batchSize = batchSize;
         this.fetchSize = fetchSize;
         this.maxRows = maxRows;
