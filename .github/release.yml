@@ -1,0 +1,27 @@
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+  categories:
+    - title: 'New Features'
+      labels:
+        - feat
+        - feature
+    - title: 'Bug Fixes'
+      labels:
+        - bug
+        - fix
+    - title: 'Maintenance'
+      labels:
+        - ci
+        - chore
+        - perf
+        - refactor
+        - security
+        - test
+    - title: 'Documentation'
+      labels:
+        - docs
+    - title: 'Dependency Upgrades'
+      labels:
+        - dependencies
