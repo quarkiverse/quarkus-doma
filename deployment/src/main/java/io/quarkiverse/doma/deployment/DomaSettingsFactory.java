@@ -78,6 +78,8 @@ public class DomaSettingsFactory {
 
     private DomaSettings.DialectType resolveDialectType(String dbKind) {
         switch (dbKind) {
+            case "db2":
+                return DomaSettings.DialectType.DB2;
             case "h2":
                 return DomaSettings.DialectType.H2;
             case "mssql":
@@ -85,10 +87,14 @@ public class DomaSettingsFactory {
             case "mysql":
             case "mariadb":
                 return DomaSettings.DialectType.MYSQL;
+            case "oracle":
+                return DomaSettings.DialectType.ORACLE;
             case "postgresql":
             case "pgsql":
             case "pg":
                 return DomaSettings.DialectType.POSTGRES;
+            case "sqlite":
+                return DomaSettings.DialectType.SQLITE;
             default:
                 throw new IllegalStateException(
                         "Can't infer the dialect from the dbKind \""
